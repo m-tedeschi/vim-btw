@@ -22,10 +22,12 @@ This program will handle the former for you, guaranteed. Mac users only. Linux u
 
 ## Installation (macOS Sequoia 15.0.1)
 1. You will need the [deprecated Discord RPC library](https://github.com/discord/discord-rpc). Don't even stress homie.
-2. Set up a new Application in the [Discord Developer Portal](https://discord.com/developers/applications). Assign an icon (I recommend the Vim logo included in the assets folder) and copy the Application ID -- you will need it later.
+2. Set up a new Application in the [Discord Developer Portal](https://discord.com/developers/applications). Assign an icon (I recommend the Vim logo included in the assets folder) and copy the Application ID -- you will need it later
 3. Open `vim-btw.c` and modify the `APP_ID` to be your Application ID
 4. Compile with g++ on macOS Sequoia 15.0.1:
-`g++ -o vim-btw vim-btw.c -L/usr/local/lib -ldiscord-rpc -I/usr/local/include -framework CoreFoundation -framework AppKit -lc++`
+```
+g++ -o vim-btw vim-btw.c -L/usr/local/lib -ldiscord-rpc -I/usr/local/include -framework CoreFoundation -framework AppKit -lc++
+```
 5. Set up a Vim BTW directory in your user home directory and copy the binary there:
 ```
 mkdir ~/vim-btw
@@ -80,7 +82,9 @@ trap stop_vim_btw EXIT
 # --- End Vim BTW --- #
 ```
 7. Reload your terminal -- Vim BTW should be running and will update your status accordingly:
-`lsof -c vim-btw`
+```
+lsof -c vim-btw
+```
 
 ## TODO / Known Bugs
 * Using the `.zshrc` config causes the Terminal to prompt user to close running
