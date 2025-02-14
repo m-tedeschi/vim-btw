@@ -9,11 +9,11 @@ The concept of a mouse is so foreign to you, you explain text highlighting using
 
 **Introducing Vim BTW.** A Discord Rich Presence updater so everybody can know that you're in your terminal and you're cooking.
 Everybody knows the only thing better than saying "I use Vim by the way" is actually peer programming in Vim with an onlooker.
-This program will handle the former for you, guaranteed. Mac users only. Linux users, please report back on portability. Windows users, stick to VS Code.
+This program will handle the former for you, guaranteed. Mac users only. Linux users, please report back on portability. Windows users, stick to VS Code or get a new operating system.
 
 ## Features
 * Updates Discord Rich Presence to show status
-    * **Idle:** when the terminal is open, the status is Idle
+    * **Idle:** when the Terminal is open, the status is Idle
     * **Editing:** when Vim is detected being open, the status is "Editing in Vim" and the file name is displayed
 * `.zshrc` script for automatic process handling (e.g. ensuring only 1 process
   runs at a time, killing process on terminal close)
@@ -81,7 +81,7 @@ trap stop_vim_btw EXIT
 
 # --- End Vim BTW --- #
 ```
-7. Reload your terminal -- Vim BTW should be running and will update your status accordingly:
+7. Reload your terminal. Vim BTW should be running and will update your status accordingly:
 ```
 lsof -c vim-btw
 ```
