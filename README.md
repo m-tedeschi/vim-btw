@@ -81,7 +81,7 @@ trap stop_vim_btw EXIT
 
 # --- End Vim BTW --- #
 ```
-7. Reload your terminal. Vim BTW should be running and will update your status accordingly:
+7. Reload your terminal. Vim BTW should be running and will update your status accordingly. You can verify that it is running with the following:
 ```
 lsof -c vim-btw
 ```
