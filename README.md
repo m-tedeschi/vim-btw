@@ -1,10 +1,8 @@
 # vim-btw
 Discord Rich Presence for Vim (by the way)
-<p align="center">
 >Vim users never quit.
 
 &emsp;&emsp;*— Unknown Author*
-</p>
 ## About
 Are you tired of having to manually mention to others that you use Vim as your text editor?
 Do you want people to *know* that you don't need fancy GUIs, 500 IDE extensions, and other visual slop?
