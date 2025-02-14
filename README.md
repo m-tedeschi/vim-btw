@@ -18,7 +18,9 @@ This program will handle the former for you, guaranteed. Mac users only. Linux u
 * `.zshrc` script for automatic process handling (e.g. ensuring only 1 process
   runs at a time, killing process on terminal close)
 * Vim by the way
-<img src="assets/vim-btw-demo.png" alt="Vim BTW demo" align="center" height="400" width="200"/>
+<p align="center">
+  <img src="assets/vim-btw-demo.png" alt="Vim BTW demo" height="400" width="200"/>
+</p>
 
 ## Installation (macOS Sequoia 15.0.1)
 1. You will need the [deprecated Discord RPC library](https://github.com/discord/discord-rpc). Don't even stress homie
