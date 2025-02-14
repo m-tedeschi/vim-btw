@@ -21,7 +21,7 @@ This program will handle the former for you, guaranteed. Mac users only. Linux u
 <img src="assets/vim-btw-demo.png" alt="Vim BTW demo" height="400" width="200"/>
 
 ## Installation (macOS Sequoia 15.0.1)
-1. You will need the [deprecated Discord RPC library](https://github.com/discord/discord-rpc). Don't even stress homie.
+1. You will need the [deprecated Discord RPC library](https://github.com/discord/discord-rpc). Don't even stress homie
 2. Set up a new Application in the [Discord Developer Portal](https://discord.com/developers/applications). Assign an icon (I recommend the Vim logo included in the assets folder) and copy the Application ID -- you will need it later
 3. Open `vim-btw.c` and modify the `APP_ID` to be your Application ID
 4. Compile with g++ on macOS Sequoia 15.0.1:
@@ -94,6 +94,6 @@ lsof -c vim-btw
     * This timer is not acccurate and resets every 10 seconds due to the
       update rate 
     * TODO: fix this so that it is one continuous timer for the duration of Terminal session
-* This product brought was cooked up in about 5 minutes using ChatGPT so please
+* This product was cooked up in about 5 minutes using ChatGPT so please
   report any bugs using the issue tracker
 * TODO: Verify functionality on other operating systems
