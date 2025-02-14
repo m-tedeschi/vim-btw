@@ -32,7 +32,7 @@ This program will handle the former for you, guaranteed. Mac users only. Linux u
 ```
 g++ -o vim-btw vim-btw.c -L/usr/local/lib -ldiscord-rpc -I/usr/local/include -framework CoreFoundation -framework AppKit -lc++
 ```
-5. Set up a Vim BTW directory in your user home directory and copy the binary there:
+5. Set up a Vim BTW directory in your user home directory and copy the binary there. If you cloned the repo to your home directory, you can probably skip this step:
 ```
 mkdir ~/vim-btw
 mv vim-btw ~/vim-btw
