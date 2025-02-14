@@ -19,6 +19,7 @@ This program will handle the former for you, guaranteed. Mac users only. Linux u
   runs at a time, killing process on terminal close)
 * Vim by the way
 <img src="assets/vim-btw-demo.png" alt="Vim BTW demo" height="400" width="200"/>
+
 ## Installation (macOS Sequoia 15.0.1)
 1. You will need the [deprecated Discord RPC library](https://github.com/discord/discord-rpc). Don't even stress homie.
 2. Set up a new Application in the [Discord Developer Portal](https://discord.com/developers/applications). Assign an icon (I recommend the Vim logo included in the assets folder) and copy the Application ID -- you will need it later.
