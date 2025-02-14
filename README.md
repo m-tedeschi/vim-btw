@@ -93,7 +93,7 @@ lsof -c vim-btw
 * Discord Rich Presence shows timer for how long Vim BTW has been running
     * This timer is not acccurate and resets every 10 seconds due to the
       update rate 
-    * TODO: fix this so that it is one continuous timer for the duration of Terminal session
+    * TODO: Fix this so that it is one continuous timer for the duration of Terminal session
 * This product was cooked up in about 5 minutes using ChatGPT so please
   report any bugs using the issue tracker
 * TODO: Verify functionality on other operating systems
