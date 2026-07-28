@@ -9,3 +9,6 @@
 
 # Swift build directory
 .build
+
+# Packaged app bundle
+Vim BTW.app
