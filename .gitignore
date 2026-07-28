@@ -1,0 +1,8 @@
+# macOS artifact
+.DS_Store
+
+# Codex session store
+.codex.session
+
+# Discord Client App ID
+.app_id.store
