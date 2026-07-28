@@ -7,6 +7,8 @@ protocol PresenceControllerDelegate: AnyObject {
 
 @MainActor
 final class PresenceController {
+    private static let updateInterval: TimeInterval = 2
+
     weak var delegate: PresenceControllerDelegate?
 
     private let config: ConfigStore
@@ -46,7 +48,7 @@ final class PresenceController {
     func start() {
         timer?.invalidate()
         tick()
-        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: Self.updateInterval, repeats: true) { [weak self] _ in
             Task { @MainActor in
                 self?.tick()
             }
