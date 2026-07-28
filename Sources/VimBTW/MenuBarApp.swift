@@ -14,6 +14,7 @@ final class MenuBarApp: NSObject, NSApplicationDelegate, PresenceControllerDeleg
     private let appIDMenuItem = NSMenuItem(title: "Set Discord App ID...", action: #selector(promptForAppID), keyEquivalent: "")
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        configureApplicationMenu()
         presenceController.delegate = self
         configureStatusItem()
         configureMenu()
@@ -26,6 +27,32 @@ final class MenuBarApp: NSObject, NSApplicationDelegate, PresenceControllerDeleg
 
     func presenceControllerDidUpdate(_ controller: PresenceController) {
         refreshMenu()
+    }
+
+    private func configureApplicationMenu() {
+        let mainMenu = NSMenu()
+
+        let appMenuItem = NSMenuItem()
+        mainMenu.addItem(appMenuItem)
+
+        let appMenu = NSMenu()
+        appMenu.addItem(NSMenuItem(title: "Quit Vim BTW", action: #selector(quit), keyEquivalent: "q"))
+        appMenuItem.submenu = appMenu
+
+        let editMenuItem = NSMenuItem()
+        mainMenu.addItem(editMenuItem)
+
+        let editMenu = NSMenu(title: "Edit")
+        editMenu.addItem(NSMenuItem(title: "Undo", action: Selector(("undo:")), keyEquivalent: "z"))
+        editMenu.addItem(NSMenuItem(title: "Redo", action: Selector(("redo:")), keyEquivalent: "Z"))
+        editMenu.addItem(.separator())
+        editMenu.addItem(NSMenuItem(title: "Cut", action: #selector(NSText.cut(_:)), keyEquivalent: "x"))
+        editMenu.addItem(NSMenuItem(title: "Copy", action: #selector(NSText.copy(_:)), keyEquivalent: "c"))
+        editMenu.addItem(NSMenuItem(title: "Paste", action: #selector(NSText.paste(_:)), keyEquivalent: "v"))
+        editMenu.addItem(NSMenuItem(title: "Select All", action: #selector(NSText.selectAll(_:)), keyEquivalent: "a"))
+        editMenuItem.submenu = editMenu
+
+        NSApp.mainMenu = mainMenu
     }
 
     private func configureStatusItem() {
@@ -98,6 +125,7 @@ final class MenuBarApp: NSObject, NSApplicationDelegate, PresenceControllerDeleg
         input.stringValue = presenceController.appID
         input.placeholderString = "Application ID"
         alert.accessoryView = input
+        alert.window.initialFirstResponder = input
 
         NSApp.activate(ignoringOtherApps: true)
         let response = alert.runModal()
