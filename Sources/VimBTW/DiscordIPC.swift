@@ -45,11 +45,34 @@ final class DiscordIPCClient {
     func connect() throws {
         disconnect()
 
-        let path = try Self.findSocketPath()
+        var lastError: Error = DiscordIPCError.socketNotFound
+
+        for path in Self.socketPaths() {
+            do {
+                let socketFD = try openSocket(at: path)
+                fd = socketFD
+                try send(opcode: .handshake, payload: [
+                    "v": 1,
+                    "client_id": clientID
+                ])
+                return
+            } catch {
+                lastError = error
+                disconnect()
+            }
+        }
+
+        throw lastError
+    }
+
+    private func openSocket(at path: String) throws -> Int32 {
         let socketFD = Darwin.socket(AF_UNIX, SOCK_STREAM, 0)
         guard socketFD >= 0 else {
             throw DiscordIPCError.connectFailed(String(cString: strerror(errno)))
         }
+
+        var noSigPipe: Int32 = 1
+        setsockopt(socketFD, SOL_SOCKET, SO_NOSIGPIPE, &noSigPipe, socklen_t(MemoryLayout<Int32>.size))
 
         var address = sockaddr_un()
         address.sun_family = sa_family_t(AF_UNIX)
@@ -81,11 +104,7 @@ final class DiscordIPCClient {
             throw DiscordIPCError.connectFailed(message)
         }
 
-        fd = socketFD
-        try send(opcode: .handshake, payload: [
-            "v": 1,
-            "client_id": clientID
-        ])
+        return socketFD
     }
 
     func disconnect() {
@@ -161,7 +180,7 @@ final class DiscordIPCClient {
         }
     }
 
-    private static func findSocketPath() throws -> String {
+    private static func socketPaths() -> [String] {
         let environment = ProcessInfo.processInfo.environment
         let candidates = [
             environment["TMPDIR"],
@@ -171,19 +190,12 @@ final class DiscordIPCClient {
             "/usr/tmp"
         ].compactMap { $0 }
 
-        for directory in candidates {
-            for index in 0...9 {
-                let path = URL(fileURLWithPath: directory)
-                    .appendingPathComponent("discord-ipc-\(index)")
-                    .path
-
-                if FileManager.default.fileExists(atPath: path) {
-                    return path
-                }
+        return candidates.flatMap { directory in
+            (0...9).compactMap { index in
+                let url = URL(fileURLWithPath: directory).appendingPathComponent("discord-ipc-\(index)")
+                return FileManager.default.fileExists(atPath: url.path) ? url.path : nil
             }
         }
-
-        throw DiscordIPCError.socketNotFound
     }
 }
 
