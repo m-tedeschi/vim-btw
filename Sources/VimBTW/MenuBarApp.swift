@@ -38,9 +38,6 @@ final class MenuBarApp: NSObject, NSApplicationDelegate, PresenceControllerDeleg
         button.image = Self.makeStatusIcon()
         button.imagePosition = .imageOnly
         button.toolTip = "Vim BTW"
-        button.wantsLayer = true
-        button.layer?.cornerRadius = 8
-        button.layer?.backgroundColor = NSColor.controlAccentColor.withAlphaComponent(0.16).cgColor
         statusItem.menu = menu
     }
 
@@ -53,9 +50,9 @@ final class MenuBarApp: NSObject, NSApplicationDelegate, PresenceControllerDeleg
         menu.addItem(.separator())
         menu.addItem(toggleMenuItem)
         menu.addItem(appIDMenuItem)
-        menu.addItem(NSMenuItem(title: "Refresh Now", action: #selector(refreshNow), keyEquivalent: "r"))
+        menu.addItem(NSMenuItem(title: "Refresh Now", action: #selector(refreshNow), keyEquivalent: ""))
         menu.addItem(.separator())
-        menu.addItem(NSMenuItem(title: "Quit Vim BTW", action: #selector(quit), keyEquivalent: "q"))
+        menu.addItem(NSMenuItem(title: "Quit", action: #selector(quit), keyEquivalent: ""))
 
         for item in menu.items {
             item.target = self
@@ -116,23 +113,14 @@ final class MenuBarApp: NSObject, NSApplicationDelegate, PresenceControllerDeleg
     }
 
     private static func makeStatusIcon() -> NSImage {
-        let image = NSImage(size: NSSize(width: 18, height: 18))
+        let image = NSImage(size: NSSize(width: 28, height: 18))
         image.lockFocus()
 
-        let bounds = NSRect(x: 1, y: 1, width: 16, height: 16)
-        NSColor.labelColor.withAlphaComponent(0.88).setStroke()
-        NSColor.labelColor.withAlphaComponent(0.10).setFill()
-
-        let path = NSBezierPath(roundedRect: bounds, xRadius: 4, yRadius: 4)
-        path.lineWidth = 1.4
-        path.fill()
-        path.stroke()
-
         let attrs: [NSAttributedString.Key: Any] = [
-            .font: NSFont.monospacedSystemFont(ofSize: 9, weight: .bold),
-            .foregroundColor: NSColor.labelColor
+            .font: NSFont.monospacedSystemFont(ofSize: 11, weight: .semibold),
+            .foregroundColor: NSColor.black
         ]
-        let text = "V"
+        let text = "Vim"
         let size = text.size(withAttributes: attrs)
         text.draw(
             at: NSPoint(
