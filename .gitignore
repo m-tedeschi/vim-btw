@@ -4,5 +4,8 @@
 # Codex session store
 .codex.session
 
-# Discord Client App ID
+# Disclord App ID
 .app_id.store
+
+# Swift build directory
+.build
