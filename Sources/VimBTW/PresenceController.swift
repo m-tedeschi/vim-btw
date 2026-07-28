@@ -11,6 +11,7 @@ final class PresenceController {
 
     private let config: ConfigStore
     private let detector: VimDetector
+    private let terminalDetector: TerminalDetector
     private var client: DiscordIPCClient?
     private var timer: Timer?
     private var lastPresence: PresenceState?
@@ -24,9 +25,14 @@ final class PresenceController {
         processStart: nil
     )
 
-    init(config: ConfigStore, detector: VimDetector = VimDetector()) {
+    init(
+        config: ConfigStore,
+        detector: VimDetector = VimDetector(),
+        terminalDetector: TerminalDetector = TerminalDetector()
+    ) {
         self.config = config
         self.detector = detector
+        self.terminalDetector = terminalDetector
     }
 
     var isEnabled: Bool {
@@ -87,6 +93,19 @@ final class PresenceController {
 
         guard !config.appID.isEmpty else {
             statusText = "Missing Discord App ID"
+            delegate?.presenceControllerDidUpdate(self)
+            return
+        }
+
+        guard terminalDetector.isTerminalRunning() else {
+            currentActivity = VimActivity(
+                isVimRunning: false,
+                filename: "Unknown File",
+                processID: nil,
+                processStart: nil
+            )
+            clearPresence()
+            statusText = "No terminal"
             delegate?.presenceControllerDidUpdate(self)
             return
         }
