@@ -1,7 +1,7 @@
 import Foundation
 
 final class TerminalDetector {
-    private let processNames = ["Ghostty", "ghostty"]
+    private let processNames = ["Ghostty", "ghostty", "Terminal"]
 
     func isTerminalRunning() -> Bool {
         processNames.contains { isProcessRunning(named: $0) }
