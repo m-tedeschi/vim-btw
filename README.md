@@ -28,7 +28,7 @@ This program will handle the former for you, guaranteed. Mac users only. Windows
 Clone this repo:
 
 ```
-git clone https://www.m-tedeschi/vim-btw.git
+git clone https://www.github.com/m-tedeschi/vim-btw.git
 cd vim-btw
 ```
 
@@ -38,7 +38,7 @@ chmod +x build.sh
 ./build.sh
 ```
 
-The Vim BTW application is produced in the project root directory.
+The Vim BTW application is built in the project root directory.
 
 From there, you can add the app to your Login Items in Settings, as well as choose whether to show/hide the Menu Bar icon.
 
