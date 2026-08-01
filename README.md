@@ -1,6 +1,9 @@
 # Vim BTW
 
-> Vim BTW is a macOS menu bar app that updates Discord Rich Presence when you are using Vim in Terminal or Ghostty.
+Discord Rich Presence for Vim (by the way)
+>Vim users never quit.
+
+&emsp;&emsp;*— Unknown Author*
 
 ## Overview
 
