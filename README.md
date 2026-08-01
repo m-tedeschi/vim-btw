@@ -10,23 +10,23 @@ The app is written in Swift, runs as a macOS menu bar utility, and talks to Disc
 
 ## Features
 
-- Updates Discord Rich Presence from a native macOS menu bar app.
-- Shows `Editing in Vim` with the detected filename when Vim is running.
-- Shows idle terminal status when Terminal or Ghostty is open and Vim is not running.
-- Clears presence when no supported terminal is running.
-- Tracks a continuous Vim session timer instead of resetting every update.
-- Lets you enable or disable presence from the menu bar.
-- Lets you set or change the Discord Application ID from the menu bar.
-- Reconnects when Discord restarts.
-- Supports Apple Terminal and Ghostty.
+- Updates Discord Rich Presence from a native macOS menu bar app
+- Shows `Editing in Vim` with the detected filename when Vim is running
+- Shows idle terminal status when Terminal or Ghostty is open and Vim is not running
+- Clears presence when no supported terminal is running
+- Tracks a continuous Vim session timer instead of resetting every update
+- Lets you enable or disable presence from the menu bar
+- Lets you set or change the Discord Application ID from the menu bar
+- Reconnects when Discord restarts
+- Supports Apple Terminal and Ghostty
 
 ## Requirements
 
-- macOS 13 or newer.
-- Swift toolchain / Xcode command line tools.
-- Discord desktop app.
-- A Discord application with Rich Presence assets configured.
-- Vim running as a `vim` process.
+- macOS 13 or newer
+- Swift toolchain / Xcode command line tools
+- Discord desktop app
+- A Discord application with Rich Presence assets configured
+- Vim running as a `vim` process
 
 ## Installation
 
@@ -58,17 +58,17 @@ Launch `Vim BTW.app`.
 
 Use the menu bar item to:
 
-- Set your Discord Application ID.
-- Enable or disable Rich Presence updates.
-- Refresh presence immediately.
-- Quit the app.
+- Set your Discord Application ID
+- Enable or disable Rich Presence updates
+- Refresh presence immediately
+- Quit the app
 
 Vim BTW checks for supported terminals and Vim periodically. If Discord is closed, the app keeps running and reconnects when Discord is available again.
 
 ## Future Improvements
 
-- Add Privacy Mode to hide the current filename.
-- Improve behavior when multiple Vim windows are open.
-- Improve behavior for Vim running inside tmux sessions.
-- Add configurable terminal process names.
-- Add configurable update interval.
+- Add Privacy Mode to hide the current filename
+- Improve behavior when multiple Vim windows are open
+- Improve behavior for Vim running inside tmux sessions
+- Add configurable terminal process names
+- Add configurable update interval
