@@ -1,51 +1,74 @@
-# vim-btw
-Discord Rich Presence for Vim (by the way)
->Vim users never quit.
+# Vim BTW
 
-&emsp;&emsp;*— Unknown Author*
-### About
-Are you tired of having to manually mention to others that you use Vim as your text editor?
-Do you want people to *know* that you don't need fancy GUIs, 500 IDE extensions, and other visual slop?
-Maybe you don't even know what a mouse is (based) and you've been in a Vim terminal session since the 90's.
-The concept of a mouse is so foreign to you, you explain text highlighting using Visual Mode Vim motions.
+> Vim BTW is a macOS menu bar app that updates Discord Rich Presence when you are using Vim in Terminal or Ghostty.
 
-**Introducing Vim BTW.** A Discord Rich Presence updater so everybody can know that you're in your terminal and you're cooking.
-Everybody knows the only thing better than saying "I use Vim by the way" is actually peer programming in Vim with an onlooker.
-This program will handle the former for you, guaranteed. Mac users only. Windows users, stick to VS Code or get a new operating system.
+## Overview
 
-### Features
-* Updates Discord Rich Presence to show status
-    * **Idle:** when the Terminal is open, the status is Idle
-    * **Editing:** when Vim is detected being open, the status is "Editing in Vim" and the file name is displayed
-* `build.sh` script for project build
-* Support for macOS Terminal and Ghostty
-* Vim by the way
-<p align="center">
-  <img src="assets/vim-btw-demo.png" alt="Vim BTW demo" height="400" width="200"/>
-</p>
+Vim BTW detects when Vim is running and publishes a Discord Rich Presence status so people can see that you are editing in Vim. When Vim is not running but a supported terminal is open, it shows an idle terminal status. When no supported terminal is running, it clears your Discord presence.
 
-### Installation (macOS Tahoe 26.5)
-Clone this repo:
+The app is written in Swift, runs as a macOS menu bar utility, and talks to Discord through local IPC instead of the deprecated Discord RPC library.
 
-```
+## Features
+
+- Updates Discord Rich Presence from a native macOS menu bar app.
+- Shows `Editing in Vim` with the detected filename when Vim is running.
+- Shows idle terminal status when Terminal or Ghostty is open and Vim is not running.
+- Clears presence when no supported terminal is running.
+- Tracks a continuous Vim session timer instead of resetting every update.
+- Lets you enable or disable presence from the menu bar.
+- Lets you set or change the Discord Application ID from the menu bar.
+- Reconnects when Discord restarts.
+- Supports Apple Terminal and Ghostty.
+
+## Requirements
+
+- macOS 13 or newer.
+- Swift toolchain / Xcode command line tools.
+- Discord desktop app.
+- A Discord application with Rich Presence assets configured.
+- Vim running as a `vim` process.
+
+## Installation
+
+Clone the repo:
+
+```sh
 git clone https://www.github.com/m-tedeschi/vim-btw.git
 cd vim-btw
 ```
 
-Run the build script:
-```
+Build the app:
+
+```sh
 chmod +x build.sh
 ./build.sh
 ```
 
-The Vim BTW application is built in the project root directory.
+The build creates:
 
-From there, you can add the app to your Login Items in Settings, as well as choose whether to show/hide the Menu Bar icon.
+```text
+Vim BTW.app
+```
 
-### TODO / Known Bugs
-* Implement feature: Toggle Privacy Mode
-    * Hides the name of the file you're editing
-* Finalize behavior for multiple Vim windows open (which one should we
-  display?)
-* Finalize behavior for Vim inside of tmux sessions (should we display this if
-  its in a different session?)
+You can move the app wherever you want, or add it to Login Items in macOS Settings.
+
+## Usage
+
+Launch `Vim BTW.app`.
+
+Use the menu bar item to:
+
+- Set your Discord Application ID.
+- Enable or disable Rich Presence updates.
+- Refresh presence immediately.
+- Quit the app.
+
+Vim BTW checks for supported terminals and Vim periodically. If Discord is closed, the app keeps running and reconnects when Discord is available again.
+
+## Future Improvements
+
+- Add Privacy Mode to hide the current filename.
+- Improve behavior when multiple Vim windows are open.
+- Improve behavior for Vim running inside tmux sessions.
+- Add configurable terminal process names.
+- Add configurable update interval.
