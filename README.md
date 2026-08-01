@@ -1,6 +1,6 @@
 # Vim BTW
 
-Discord Rich Presence for Vim (by the way)
+Discord Rich Presence for Vim (by the way).
 >Vim users never quit.
 
 &emsp;&emsp;*— Unknown Author*
