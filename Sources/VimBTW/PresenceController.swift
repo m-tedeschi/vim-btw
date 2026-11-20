@@ -41,6 +41,14 @@ final class PresenceController {
         config.isEnabled
     }
 
+    var isFileHiderModeEnabled: Bool {
+        config.isFileHiderModeEnabled
+    }
+
+    var editingStatus: String {
+        config.isFileHiderModeEnabled ? "Editing in Vim" : "Editing \(currentActivity.filename)"
+    }
+
     var appID: String {
         config.appID
     }
@@ -75,6 +83,11 @@ final class PresenceController {
             statusText = "Disabled"
         }
         delegate?.presenceControllerDidUpdate(self)
+    }
+
+    func setFileHiderModeEnabled(_ enabled: Bool) {
+        config.isFileHiderModeEnabled = enabled
+        tick()
     }
 
     func setAppID(_ appID: String) {
@@ -116,13 +129,17 @@ final class PresenceController {
         updateSessionStart(for: activity)
         currentActivity = activity
 
-        let presence = PresenceState(activity: activity, sessionStart: vimSessionStart)
+        let presence = PresenceState(
+            activity: activity,
+            sessionStart: vimSessionStart,
+            hideFilename: config.isFileHiderModeEnabled
+        )
 
         do {
             let client = try connectedClient()
             try client.setActivity(presence)
             lastPresence = presence
-            statusText = activity.isVimRunning ? "Editing \(activity.filename)" : "Idle"
+            statusText = activity.isVimRunning ? editingStatus : "Idle"
         } catch {
             client?.disconnect()
             client = nil

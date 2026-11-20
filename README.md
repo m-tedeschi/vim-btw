@@ -18,6 +18,7 @@ The app is written in Swift, runs as a macOS menu bar utility, and talks to Disc
 - Shows idle terminal status when Terminal or Ghostty is open and Vim is not running
 - Clears presence when no supported terminal is running
 - Tracks a continuous Vim session timer instead of resetting every update
+- Hides filenames in Discord and the menu bar with a persistent File Hider Mode setting
 - Lets you enable or disable presence from the menu bar
 - Lets you set or change the Discord Application ID from the menu bar
 - Reconnects when Discord restarts
@@ -63,6 +64,7 @@ Use the menu bar item to:
 
 - Set your Discord Application ID
 - Enable or disable Rich Presence updates
+- Toggle File Hider Mode (on by default; saved between app launches)
 - Refresh presence immediately
 - Quit the app
 
@@ -70,7 +72,6 @@ Vim BTW checks for supported terminals and Vim periodically. If Discord is close
 
 ## Future Improvements
 
-- Add Privacy Mode to hide the current filename
 - Improve behavior when multiple Vim windows are open
 - Improve behavior for Vim running inside tmux sessions
 - Add configurable terminal process names

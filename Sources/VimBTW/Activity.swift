@@ -10,12 +10,13 @@ struct VimActivity: Equatable {
 struct PresenceState: Equatable {
     let activity: VimActivity
     let sessionStart: Int
+    var hideFilename = false
 
     var details: String {
         activity.isVimRunning ? "Editing in Vim" : "Using Terminal"
     }
 
-    var state: String {
-        activity.isVimRunning ? activity.filename : "Idle"
+    var state: String? {
+        activity.isVimRunning ? (hideFilename ? nil : activity.filename) : "Idle"
     }
 }

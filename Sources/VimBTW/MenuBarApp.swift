@@ -11,6 +11,7 @@ final class MenuBarApp: NSObject, NSApplicationDelegate, PresenceControllerDeleg
     private let statusMenuItem = NSMenuItem(title: "Starting...", action: nil, keyEquivalent: "")
     private let activityMenuItem = NSMenuItem(title: "Activity: Idle", action: nil, keyEquivalent: "")
     private let toggleMenuItem = NSMenuItem(title: "Disable Presence", action: #selector(togglePresence), keyEquivalent: "")
+    private let fileHiderMenuItem = NSMenuItem(title: "File Hider Mode", action: #selector(toggleFileHiderMode), keyEquivalent: "")
     private let appIDMenuItem = NSMenuItem(title: "Set Discord App ID...", action: #selector(promptForAppID), keyEquivalent: "")
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -76,6 +77,7 @@ final class MenuBarApp: NSObject, NSApplicationDelegate, PresenceControllerDeleg
         menu.addItem(activityMenuItem)
         menu.addItem(.separator())
         menu.addItem(toggleMenuItem)
+        menu.addItem(fileHiderMenuItem)
         menu.addItem(appIDMenuItem)
         menu.addItem(NSMenuItem(title: "Refresh Now", action: #selector(refreshNow), keyEquivalent: ""))
         menu.addItem(.separator())
@@ -93,8 +95,10 @@ final class MenuBarApp: NSObject, NSApplicationDelegate, PresenceControllerDeleg
 
         let activity = presenceController.currentActivity
         activityMenuItem.title = activity.isVimRunning
-            ? "Activity: Editing \(activity.filename)"
+            ? "Activity: \(presenceController.editingStatus)"
             : "Activity: Idle"
+
+        fileHiderMenuItem.state = presenceController.isFileHiderModeEnabled ? .on : .off
 
         toggleMenuItem.title = presenceController.isEnabled ? "Disable Presence" : "Enable Presence"
 
@@ -107,6 +111,10 @@ final class MenuBarApp: NSObject, NSApplicationDelegate, PresenceControllerDeleg
 
     @objc private func togglePresence() {
         presenceController.setEnabled(!presenceController.isEnabled)
+    }
+
+    @objc private func toggleFileHiderMode() {
+        presenceController.setFileHiderModeEnabled(!presenceController.isFileHiderModeEnabled)
     }
 
     @objc private func refreshNow() {

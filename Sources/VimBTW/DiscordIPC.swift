@@ -115,21 +115,25 @@ final class DiscordIPCClient {
     }
 
     func setActivity(_ presence: PresenceState, processID: Int32 = getpid()) throws {
+        var activity: [String: Any] = [
+            "details": presence.details,
+            "timestamps": [
+                "start": presence.sessionStart
+            ],
+            "assets": [
+                "large_image": "terminal",
+                "large_text": "macOS Terminal"
+            ]
+        ]
+        if let state = presence.state {
+            activity["state"] = state
+        }
+
         let payload: [String: Any] = [
             "cmd": "SET_ACTIVITY",
             "args": [
                 "pid": Int(processID),
-                "activity": [
-                    "details": presence.details,
-                    "state": presence.state,
-                    "timestamps": [
-                        "start": presence.sessionStart
-                    ],
-                    "assets": [
-                        "large_image": "terminal",
-                        "large_text": "macOS Terminal"
-                    ]
-                ]
+                "activity": activity
             ],
             "nonce": UUID().uuidString
         ]
